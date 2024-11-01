@@ -1,8 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lombok.AllArgsConstructor;
@@ -26,12 +24,11 @@ public class StaffEntity {
     private String lastName;
     private String designation;
 
-
     private Gender gender;
 
-    
     private Date joinedDate;
     private Date dob;
+
     private String addressLine01;
     private String addressLine02;
     private String addressLine03;
@@ -40,11 +37,14 @@ public class StaffEntity {
     private String contactNumber;
     private String email;
 
-
     private Role role;
 
+    @ManyToMany
+    @JoinColumn(name = "staff_memmber_fields")
+    private List<FieldEntity> field;
 
-    private List<Field> field;
-    private List<Vehicle> vehicle;
+    @OneToMany
+    @JoinColumn(name = "staff_memmber_vehicles")
+    private List<VehicleEntity> vehicle;
 
 }
