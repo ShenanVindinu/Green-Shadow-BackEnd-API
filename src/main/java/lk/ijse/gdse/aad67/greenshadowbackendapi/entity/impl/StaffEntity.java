@@ -1,8 +1,10 @@
-package lk.ijse.gdse.aad67.greenshadowbackendapi.entity;
+package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,7 @@ public class StaffEntity {
     private String designation;
 
 
-    private Enum gender;
+    private Gender gender;
 
     
     private Date joinedDate;
@@ -39,7 +41,7 @@ public class StaffEntity {
     private String email;
 
 
-    private Enum role;
+    private Role role;
 
 
     private List<Field> field;
