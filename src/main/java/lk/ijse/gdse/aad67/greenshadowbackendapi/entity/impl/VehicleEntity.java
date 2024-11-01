@@ -26,6 +26,4 @@ public class VehicleEntity {
 
     private String remarks;
 
-
-
 }
