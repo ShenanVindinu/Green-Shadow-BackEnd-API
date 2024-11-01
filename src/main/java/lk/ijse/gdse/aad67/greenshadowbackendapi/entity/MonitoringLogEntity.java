@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "monitering_Log")
-public class MonitoringLog {
+public class MonitoringLogEntity {
     @Id
     private String logCode;
 
