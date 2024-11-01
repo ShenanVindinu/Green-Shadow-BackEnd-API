@@ -1,14 +1,10 @@
-package lk.ijse.gdse.aad67.greenshadowbackendapi.entity;
+package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +23,15 @@ public class MonitoringLogEntity {
     @Lob
     private String observedImage;
 
-    private List<Field> field;
-    private List<Crop> crop;
-    private List<Staff> staff;
+    @OneToMany
+    @JoinColumn(name = "log_field")
+    private List<FieldEntity> field;
+
+    @OneToMany
+    @JoinColumn(name = "crop_field")
+    private List<CropEntity> crop;
+
+    @OneToMany
+    @JoinColumn(name = "staff_in_field")
+    private List<StaffEntity> staff;
 }
