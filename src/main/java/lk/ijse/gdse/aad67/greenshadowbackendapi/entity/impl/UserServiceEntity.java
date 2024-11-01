@@ -1,8 +1,9 @@
-package lk.ijse.gdse.aad67.greenshadowbackendapi.entity;
+package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,6 @@ public class UserServiceEntity {
     @Id
     private String email;
     private String password;
-    private Enum role;
+    private Role role;
 
 }
