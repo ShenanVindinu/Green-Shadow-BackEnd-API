@@ -1,15 +1,11 @@
-package lk.ijse.gdse.aad67.greenshadowbackendapi.entity;
+package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Field;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,10 +22,13 @@ public class CropEntity {
 
     @Lob
     private String cropImage;
+
     private String category;
     private String cropSeason;
 
-    private Field field;
+    @ManyToOne
+    @JoinColumn(name = "crop_field")
+    private FieldEntity field;
 
 
 }
