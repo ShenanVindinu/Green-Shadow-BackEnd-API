@@ -38,7 +38,7 @@ public class StaffEntity {
 
     private Role role;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "staff_memmber_fields")
     private List<FieldEntity> field;
 
