@@ -1,9 +1,7 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.EquipmentStatus;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.EquipmentType;
 import lombok.AllArgsConstructor;
@@ -24,8 +22,14 @@ public class EquipmentEntity {
     private String equipmentName;
     private EquipmentType equipmentType;
     private EquipmentStatus equipmentStatus;
-    private Staff assignedStaffDetails;
-    private Field assignedFieldDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "equipment_assigned_staff_details")
+    private StaffEntity assignedStaffDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "equipment_assigned_field_details")
+    private FieldEntity assignedFieldDetails;
 
 
 }
