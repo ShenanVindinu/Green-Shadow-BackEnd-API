@@ -17,6 +17,7 @@ public class UserServiceEntity {
 
     @Id
     private String email;
+
     private String password;
     private Role role;
 
