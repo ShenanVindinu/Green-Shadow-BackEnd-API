@@ -1,9 +1,6 @@
-package lk.ijse.gdse.aad67.greenshadowbackendapi.entity;
+package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +20,13 @@ public class FieldEntity {
     private Point fieldLocation;
     private Double extentSizeOfTheField;
 
-    private List<Crop> crops;
-    private List<Staff> staff;
+    @OneToMany
+    @JoinColumn(name = "crops_in_field")
+    private List<CropEntity> crops;
+
+    @OneToMany
+    @JoinColumn(name = "staff_in_field")
+    private List<StaffEntity> staff;
 
     @Lob
     private String fieldImage1;
