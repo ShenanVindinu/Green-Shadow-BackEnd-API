@@ -3,6 +3,7 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "staff")
-public class StaffEntity {
+public class StaffEntity implements SuperEntity {
     @Id
     private String id;
 
