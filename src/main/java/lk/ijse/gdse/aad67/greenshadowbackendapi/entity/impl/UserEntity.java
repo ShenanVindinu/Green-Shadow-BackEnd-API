@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity implements SuperEntity {
 
     @Id
     private String email;
