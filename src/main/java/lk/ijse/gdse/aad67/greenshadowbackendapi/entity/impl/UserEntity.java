@@ -1,5 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -19,6 +20,8 @@ public class UserEntity {
     private String email;
 
     private String password;
+
+    @Column(unique = true)
     private Role role;
 
 }

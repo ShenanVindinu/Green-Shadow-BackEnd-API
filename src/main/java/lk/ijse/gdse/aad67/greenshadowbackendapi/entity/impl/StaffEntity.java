@@ -23,6 +23,7 @@ public class StaffEntity {
     private String lastName;
     private String designation;
 
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     private Date joinedDate;
@@ -36,6 +37,7 @@ public class StaffEntity {
     private String contactNumber;
     private String email;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany
