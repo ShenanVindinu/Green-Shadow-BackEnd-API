@@ -17,6 +17,6 @@ public class CropDTO {
     private String cropImage;
     private String category;
     private String cropSeason;
-    private FieldEntity field;
+    private String field;
 
 }
