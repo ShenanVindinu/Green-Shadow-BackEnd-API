@@ -4,6 +4,7 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.EquipmentStatus;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.EquipmentType;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "equipment")
-public class EquipmentEntity {
+public class EquipmentEntity implements SuperEntity {
 
     @Id
     private String equipmentId;
