@@ -30,11 +30,21 @@ public class StaffEntity implements SuperEntity {
     private Date joinedDate;
     private Date dob;
 
+    @Column(name = "building_no")
     private String addressLine01;
+
+    @Column(name = "Lane")
     private String addressLine02;
+
+    @Column(name = "city")
     private String addressLine03;
+
+    @Column(name = "main_state")
     private String addressLine04;
+
+    @Column(name = "postal_code")
     private String addressLine05;
+
     private String contactNumber;
     private String email;
 
