@@ -24,15 +24,12 @@ public class MonitoringLogEntity implements SuperEntity {
     @Lob
     private String observedImage;
 
-    @OneToMany
-    @JoinColumn(name = "log_field")
+    @OneToMany(mappedBy = "fieldCode")
     private List<FieldEntity> field;
 
-    @OneToMany
-    @JoinColumn(name = "crop_field")
+    @OneToMany(mappedBy = "cropCode")
     private List<CropEntity> crop;
 
-    @OneToMany
-    @JoinColumn(name = "staff_in_field")
+    @OneToMany(mappedBy = "staffId")
     private List<StaffEntity> staff;
 }
