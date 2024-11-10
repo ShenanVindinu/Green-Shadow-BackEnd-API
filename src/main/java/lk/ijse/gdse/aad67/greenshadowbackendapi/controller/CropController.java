@@ -58,10 +58,10 @@ public class CropController {
             logger.info("Crop Saved Successfully");
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (DataPersistException e) {
-            logger.error("BAD_REQUEST: Error processing request with cropDTO: {}", cropDTO, e);
+            logger.error("BAD_REQUEST: Error processing request", e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            logger.error("INTERNAL_SERVER_ERROR: Unexpected error processing cropDTO: {}", cropDTO, e);
+            logger.error("INTERNAL_SERVER_ERROR: Unexpected error", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
