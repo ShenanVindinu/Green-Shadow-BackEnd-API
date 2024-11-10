@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/crop")
 public class CropController {
 
+    private final CropService cropService;
+
     @Autowired
-    private CropService cropService;
+    public CropController(CropService cropService) {
+        this.cropService = cropService;
+    }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveCrop(@RequestBody CropDTO cropDTO) {
