@@ -22,15 +22,10 @@ public class FieldEntity implements SuperEntity {
     private Point fieldLocation;
     private Double extentSizeOfTheField;
 
-    @OneToMany(mappedBy = "field")
+    @OneToMany(mappedBy = "cropCode")
     private List<CropEntity> crops;
 
-    @ManyToMany
-    @JoinTable(
-            name = "staff_in_field",
-            joinColumns = @JoinColumn(name = "fieldCode"),
-            inverseJoinColumns = @JoinColumn(name = "staffId")
-    )
+    @OneToMany(mappedBy = "staffId")
     private List<StaffEntity> staff;
 
     @Lob
