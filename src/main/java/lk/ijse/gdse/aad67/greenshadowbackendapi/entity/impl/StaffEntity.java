@@ -52,10 +52,10 @@ public class StaffEntity implements SuperEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "fieldCode")
+    @ManyToMany(mappedBy = "staff")
     private List<FieldEntity> field;
 
-    @OneToMany(mappedBy = "vehicleCode")
+    @OneToMany(mappedBy = "allocatedStaffMemberDetails")
     private List<VehicleEntity> vehicle;
 
 }
