@@ -25,12 +25,12 @@ public class EquipmentEntity implements SuperEntity {
     private EquipmentType equipmentType;
     private EquipmentStatus equipmentStatus;
 
-    @OneToOne
-    @JoinColumn(name = "equipment_assigned_staff_id")
+    @ManyToOne
+    @JoinColumn(name = "equipment_assigned_staff_details")
     private StaffEntity assignedStaffDetails;
 
-    @OneToOne
-    @JoinColumn(name = "equipment_assigned_field_id")
+    @ManyToOne
+    @JoinColumn(name = "equipment_assigned_field_details")
     private FieldEntity assignedFieldDetails;
 
 
