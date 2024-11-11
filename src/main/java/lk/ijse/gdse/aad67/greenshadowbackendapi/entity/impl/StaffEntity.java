@@ -18,6 +18,7 @@ import java.util.List;
 @Table(name = "staff")
 public class StaffEntity implements SuperEntity {
     @Id
+    @Column(name = "staffId")
     private String staffId;
 
     private String firstName;
