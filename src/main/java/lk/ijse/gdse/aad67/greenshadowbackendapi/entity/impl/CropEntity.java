@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class CropEntity implements SuperEntity {
 
     @Id
+    @Column(name = "cropCode")
     private String cropCode;
 
     private String cropCommonName;
