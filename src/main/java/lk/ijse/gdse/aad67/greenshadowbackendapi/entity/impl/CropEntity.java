@@ -29,7 +29,7 @@ public class CropEntity implements SuperEntity {
     private String cropSeason;
 
     @ManyToOne
-    @JoinColumn(name = "crop_field")
+    @JoinColumn(name = "field_id")
     private FieldEntity field;
 
 
