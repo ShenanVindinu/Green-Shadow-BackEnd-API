@@ -24,7 +24,7 @@ public class CropServiceIMPL implements CropService {
 
     @Override
     public void saveCrop(CropDTO cropDTO) {
-        logger.info(cropDTO.getField());
+        logger.info(cropDTO.getFieldCode());
         cropDAO.save(mapping.toCropEntity(cropDTO));
     }
 }
