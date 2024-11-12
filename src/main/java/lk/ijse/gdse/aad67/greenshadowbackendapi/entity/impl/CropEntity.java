@@ -3,9 +3,7 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
 import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.SuperEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @AllArgsConstructor
@@ -29,7 +27,7 @@ public class CropEntity implements SuperEntity {
     private String cropSeason;
 
     @ManyToOne
-    @JoinColumn(name = "field_id", nullable = false)
+    @JoinColumn(name = "fieldCode")
     private FieldEntity field;
 
 
