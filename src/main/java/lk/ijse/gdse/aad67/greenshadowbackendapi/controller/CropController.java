@@ -51,7 +51,7 @@ public class CropController {
             cropDTO.setCropImage(base64CropPic);
             cropDTO.setCategory(category);
             cropDTO.setCropSeason(cropSeason);
-            cropDTO.setField(field);
+            cropDTO.setFieldCode(field);
             logger.info(field);
             cropService.saveCrop(cropDTO);
             logger.info("Crop Saved Successfully");
