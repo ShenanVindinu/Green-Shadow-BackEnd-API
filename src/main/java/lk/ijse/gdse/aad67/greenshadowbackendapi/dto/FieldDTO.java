@@ -15,7 +15,7 @@ public class FieldDTO {
 
     private String fieldCode;
     private String fieldName;
-    private Point fieldLocation;
+    private String fieldLocation;
     private Double extentSizeOfTheField;
     private List<CropDTO> crops;
     private List<StaffDTO> staff;
