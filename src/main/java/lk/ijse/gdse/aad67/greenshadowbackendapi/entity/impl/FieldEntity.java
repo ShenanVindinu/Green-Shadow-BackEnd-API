@@ -19,7 +19,7 @@ public class FieldEntity implements SuperEntity {
     @Column(name = "field_code")
     private String fieldCode;
     private String fieldName;
-    private Point fieldLocation;
+    private String fieldLocation;
     private Double extentSizeOfTheField;
 
     @OneToMany(mappedBy = "field")
