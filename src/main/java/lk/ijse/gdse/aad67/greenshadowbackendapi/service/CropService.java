@@ -4,4 +4,6 @@ import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
 
 public interface CropService {
     void saveCrop(CropDTO cropDTO);
+
+    void deleteCrop(String cropCode);
 }
