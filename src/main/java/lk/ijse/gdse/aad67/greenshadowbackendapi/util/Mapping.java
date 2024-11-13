@@ -19,12 +19,14 @@ public class Mapping {
         this.modelMapper = new ModelMapper();
     }
 
+    //Crop
     public CropEntity toCropEntity(CropDTO cropDTO){
         return modelMapper.map(cropDTO,CropEntity.class);
     }
-
-
     public List<CropDTO> asCropDTOList(List<CropEntity> cropEntities) {
         return modelMapper.map(cropEntities, new TypeToken<List<CropDTO>>() {}.getType());
     }
+
+    //Equipment
+
 }
