@@ -13,10 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "monitering_Log")
+@Table(name = "monitoring_log")
 public class MonitoringLogEntity implements SuperEntity {
     @Id
-    @Column(name = "logCode")
+    @Column(name = "log_code")
     private String logCode;
 
     private Date logDate;
