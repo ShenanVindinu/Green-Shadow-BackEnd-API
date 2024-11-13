@@ -25,12 +25,7 @@ public class FieldEntity implements SuperEntity {
     @OneToMany(mappedBy = "field")
     private List<CropEntity> crops;
 
-    @ManyToMany
-    @JoinTable(
-            name = "staff_in_field",
-            joinColumns = @JoinColumn(name = "fieldCode"),
-            inverseJoinColumns = @JoinColumn(name = "staffId")
-    )
+    @OneToMany(mappedBy = "staffId")
     private List<StaffEntity> staff;
 
     @Lob
