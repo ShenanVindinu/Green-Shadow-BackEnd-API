@@ -1,7 +1,9 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.util;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.EquipmentDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.CropEntity;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,11 @@ import java.util.List;
 @Component
 public class Mapping {
 
-    @Autowired
     private final ModelMapper modelMapper;
 
-    public Mapping(){
-        this.modelMapper = new ModelMapper();
+    @Autowired
+    public Mapping(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
     }
 
     //Crop
@@ -28,5 +30,8 @@ public class Mapping {
     }
 
     //Equipment
+    public EquipmentEntity toEquipmentEntity(EquipmentDTO equipmentDTO) {
+        return modelMapper.map(equipmentDTO,EquipmentEntity.class);
+    }
 
 }
