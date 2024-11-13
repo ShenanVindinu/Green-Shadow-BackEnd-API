@@ -22,7 +22,11 @@ public class EquipmentEntity implements SuperEntity {
     private String equipmentId;
 
     private String equipmentName;
+
+    @Enumerated(EnumType.STRING)
     private EquipmentType equipmentType;
+
+    @Enumerated(EnumType.STRING)
     private EquipmentStatus equipmentStatus;
 
     @OneToOne
