@@ -1,9 +1,11 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.CropNotFoundException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.CropService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.AppUtil;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.util.RegexProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/crop")
@@ -59,6 +63,23 @@ public class CropController {
         } catch (DataPersistException e) {
             logger.error("BAD_REQUEST: Error processing request", e);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("INTERNAL_SERVER_ERROR: Unexpected error", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{cropCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteCrop(@PathVariable("cropCode") String cropCode) {
+        try {
+            if (!RegexProcess.cropIdMatcher(cropCode)) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            cropService.deleteCrop(cropCode);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (CropNotFoundException e) {
+            logger.error("INTERNAL_SERVER_ERROR: Unexpected error", e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error("INTERNAL_SERVER_ERROR: Unexpected error", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
