@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,31 @@ public class CropServiceIMPL implements CropService {
             throw new CropNotFoundException("Crop Not Found");
         } else {
             cropDAO.deleteById(cropCode);
+        }
+    }
+
+    @Override
+    public List<CropDTO> getAllCrops() {
+        return mapping.asCropDTOList(cropDAO.findAll());
+    }
+
+    @Override
+    public void updateCrop(String cropCode, CropDTO updatedCropDto) {
+        Optional<CropEntity> optionalCrop = cropDAO.findById(cropCode);
+        if (optionalCrop.isPresent()) {
+            CropEntity existingCrop = optionalCrop.get();
+
+            boolean isIdChanged = !cropCode.equals(updatedCropDto.getCropCode());
+
+            if (isIdChanged) {
+                cropDAO.delete(existingCrop);
+            }
+
+            CropEntity newCrop = mapping.toCropEntity(updatedCropDto);
+            cropDAO.save(newCrop);
+
+        } else {
+            throw new CropNotFoundException("Crop with code " + cropCode + " not found");
         }
     }
 }
