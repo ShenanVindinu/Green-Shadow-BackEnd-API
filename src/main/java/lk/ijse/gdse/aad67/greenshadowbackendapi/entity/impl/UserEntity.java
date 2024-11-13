@@ -1,9 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.SuperEntity;
 import lombok.AllArgsConstructor;
@@ -24,6 +21,7 @@ public class UserEntity implements SuperEntity {
     private String password;
 
     @Column(unique = true)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 }
