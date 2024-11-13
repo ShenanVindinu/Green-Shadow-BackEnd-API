@@ -86,4 +86,45 @@ public class CropController {
         }
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CropDTO> getAllCrops() {return cropService.getAllCrops();}
+
+    @PutMapping(value = {"{cropCode}"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateCrop(@PathVariable("cropCode") String cropCode,
+                                           @RequestPart("cropCommonName") String cropCommonName,
+                                           @RequestPart("cropScientificName") String cropScientificName,
+                                           @RequestPart("cropImage") MultipartFile cropImage,
+                                           @RequestPart("category") String category,
+                                           @RequestPart("cropSeason") String cropSeason,
+                                           @RequestPart("field") String field
+    )
+    {
+        String base64CropPic = "";
+        try {
+            byte[] bytesCropPic = cropImage.getBytes();
+            base64CropPic = AppUtil.PicToBase64(bytesCropPic);
+
+            CropDTO updatedCropDto = new CropDTO();
+            updatedCropDto.setCropCode(cropCode);
+            updatedCropDto.setCropCommonName(cropCommonName);
+            updatedCropDto.setCropScientificName(cropScientificName);
+            updatedCropDto.setCropImage(base64CropPic);
+            updatedCropDto.setCategory(category);
+            updatedCropDto.setCropSeason(cropSeason);
+            updatedCropDto.setFieldCode(field);
+
+            if (!RegexProcess.cropIdMatcher(cropCode) || cropCode == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            cropService.updateCrop(cropCode, updatedCropDto);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (CropNotFoundException e) {
+            logger.error("Crop Not Found",e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("Internal Server Error",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }
