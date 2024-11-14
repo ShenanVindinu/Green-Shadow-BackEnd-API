@@ -49,4 +49,23 @@ public class FieldServiceIMPL implements FieldService {
             fieldDAO.deleteById(fieldId);
         }
     }
+
+    @Override
+    public void updateField(String fieldId, FieldDTO updatedfieldDTO) {
+        Optional<FieldEntity> fieldEntity = fieldDAO.findById(fieldId);
+        if (fieldEntity.isPresent()) {
+            FieldEntity existingField = fieldEntity.get();
+
+            boolean isChanged = !fieldId.equals(existingField.getFieldId());
+
+            if (isChanged) {
+                fieldDAO.delete(existingField);
+            }
+
+            FieldEntity newField = mapping.toFieldEntity(updatedfieldDTO);
+            fieldDAO.save(newField);
+        } else {
+            throw new FieldNotFound(fieldId+" field Not Found");
+        }
+    }
 }
