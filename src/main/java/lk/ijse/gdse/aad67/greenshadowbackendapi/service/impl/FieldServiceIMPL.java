@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class FieldServiceIMPL implements FieldService {
@@ -29,5 +31,10 @@ public class FieldServiceIMPL implements FieldService {
     public void saveField(FieldDTO fieldDTO) {
         FieldEntity fieldEntity = mapping.toFieldEntity(fieldDTO);
         fieldDAO.save(fieldEntity);
+    }
+
+    @Override
+    public List<FieldDTO> getAllFields() {
+        return mapping.asFieldDTOList(fieldDAO.findAll());
     }
 }
