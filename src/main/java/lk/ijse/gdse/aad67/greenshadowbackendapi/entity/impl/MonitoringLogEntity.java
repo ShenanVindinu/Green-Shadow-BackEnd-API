@@ -28,4 +28,8 @@ public class MonitoringLogEntity implements SuperEntity {
     @ManyToOne
     @JoinColumn(name = "field_id")
     private FieldEntity field;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private StaffEntity staff;
 }
