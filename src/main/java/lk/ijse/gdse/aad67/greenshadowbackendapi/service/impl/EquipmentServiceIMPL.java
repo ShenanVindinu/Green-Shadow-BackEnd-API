@@ -3,12 +3,15 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.service.impl;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dao.EquipmentDAO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.EquipmentDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.EquipmentNotFound;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.EquipmentService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.Mapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class EquipmentServiceIMPL implements EquipmentService {
@@ -29,5 +32,15 @@ public class EquipmentServiceIMPL implements EquipmentService {
         EquipmentEntity equipmentEntity = mapping.toEquipmentEntity(equipmentDTO);
 
         equipmentDAO.save(equipmentEntity);
+    }
+
+    @Override
+    public void deleteEquipment(String equipmentId) {
+        Optional<EquipmentEntity> equipmentEntity = equipmentDAO.findById(equipmentId);
+        if (equipmentEntity.isEmpty()) {
+            throw new EquipmentNotFound("Equipment not found");
+        } else {
+            equipmentDAO.delete(equipmentEntity.get());
+        }
     }
 }
