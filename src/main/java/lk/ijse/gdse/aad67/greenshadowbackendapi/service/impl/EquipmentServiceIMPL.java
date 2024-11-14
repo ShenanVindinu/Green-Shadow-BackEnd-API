@@ -25,7 +25,9 @@ public class EquipmentServiceIMPL implements EquipmentService {
 
     @Override
     public void saveEquipment(EquipmentDTO equipmentDTO) {
+        logger.info("Saving Equipment "+equipmentDTO.getAssignedFieldDetails());
         EquipmentEntity equipmentEntity = mapping.toEquipmentEntity(equipmentDTO);
+        logger.info("Saving Equipment "+equipmentEntity.getAssignedFieldDetails());
         equipmentDAO.save(equipmentEntity);
     }
 }
