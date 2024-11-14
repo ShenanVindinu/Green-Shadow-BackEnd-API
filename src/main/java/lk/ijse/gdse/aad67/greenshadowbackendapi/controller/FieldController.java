@@ -89,4 +89,42 @@ public class FieldController {
         }
     }
 
+    @PutMapping(value = "{fieldId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateField(@PathVariable("fieldId") String fieldId,
+                                            @RequestPart("fieldName") String fieldName,
+                                            @RequestPart("fieldLocation") String fieldLocation,
+                                            @RequestPart("extentSizeOfTheField") String extentSizeOfTheField,
+                                            @RequestPart("fieldImage1") String fieldImage1,
+                                            @RequestPart("fieldImage2") String fieldImage2
+    ) {
+        String base64FieldPic1 = "";
+        String base64FieldPic2 = "";
+        try {
+            byte[] bytesFieldPic1 = fieldImage1.getBytes();
+            byte[] bytesFieldPic2 = fieldImage2.getBytes();
+            base64FieldPic1 = AppUtil.PicToBase64(bytesFieldPic1);
+            base64FieldPic2 = AppUtil.PicToBase64(bytesFieldPic2);
+
+            FieldDTO updatedFieldDTO = new FieldDTO();
+            updatedFieldDTO.setFieldId(fieldId);
+            updatedFieldDTO.setFieldName(fieldName);
+            updatedFieldDTO.setFieldLocation(fieldLocation);
+            updatedFieldDTO.setExtentSizeOfTheField(Double.valueOf(extentSizeOfTheField));
+            updatedFieldDTO.setFieldImage1(base64FieldPic1);
+            updatedFieldDTO.setFieldImage2(base64FieldPic2);
+            if (!RegexProcess.fieldIdMatcher(fieldId) || fieldId == null) {
+                throw new FieldNotFound(fieldId+" Field not found");
+            } else {
+                fieldService.updateField(fieldId,updatedFieldDTO);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (FieldNotFound e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
