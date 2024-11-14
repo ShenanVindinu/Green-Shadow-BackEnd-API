@@ -37,7 +37,7 @@ public class CropController {
             @RequestPart("cropImage") MultipartFile cropImage,
             @RequestPart("category") String category,
             @RequestPart("cropSeason") String cropSeason,
-            @RequestPart("field") String field
+            @RequestPart("fieldCode") String fieldCode
 
             ) {
         String base64CropPic = "";
@@ -46,17 +46,17 @@ public class CropController {
             byte[] bytesCropPic = cropImage.getBytes();
             base64CropPic = AppUtil.PicToBase64(bytesCropPic);
 
-            String cropId = AppUtil.generateCropId();
+            String cropCode = AppUtil.generateCropId();
 
             CropDTO cropDTO = new CropDTO();
-            cropDTO.setCropCode(cropId);
+            cropDTO.setCropId(cropCode);
             cropDTO.setCropCommonName(cropCommonName);
             cropDTO.setCropScientificName(cropScientificName);
             cropDTO.setCropImage(base64CropPic);
             cropDTO.setCategory(category);
             cropDTO.setCropSeason(cropSeason);
-            cropDTO.setFieldCode(field);
-            logger.info(field);
+            cropDTO.setFieldCode(fieldCode);
+            logger.info(fieldCode);
             cropService.saveCrop(cropDTO);
             logger.info("Crop Saved Successfully");
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -105,7 +105,7 @@ public class CropController {
             base64CropPic = AppUtil.PicToBase64(bytesCropPic);
 
             CropDTO updatedCropDto = new CropDTO();
-            updatedCropDto.setCropCode(cropCode);
+            updatedCropDto.setCropId(cropCode);
             updatedCropDto.setCropCommonName(cropCommonName);
             updatedCropDto.setCropScientificName(cropScientificName);
             updatedCropDto.setCropImage(base64CropPic);

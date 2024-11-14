@@ -54,7 +54,7 @@ public class CropServiceIMPL implements CropService {
         if (optionalCrop.isPresent()) {
             CropEntity existingCrop = optionalCrop.get();
 
-            boolean isIdChanged = !cropCode.equals(updatedCropDto.getCropCode());
+            boolean isIdChanged = !cropCode.equals(updatedCropDto.getCropId());
 
             if (isIdChanged) {
                 cropDAO.delete(existingCrop);
