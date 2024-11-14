@@ -5,6 +5,7 @@ import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.EquipmentNotFound;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.EquipmentService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.AppUtil;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.util.RegexProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,4 +65,23 @@ public class EquipmentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping(value = "{equipmentId}")
+    public ResponseEntity<Void> updateEquipment( @PathVariable("equipmentId") String equipmentId,
+                                                 @RequestBody EquipmentDTO equipmentDTO ) {
+        try {
+            if (!RegexProcess.equipmentIdMatcher(equipmentId) || equipmentId == null){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            equipmentService.updateEquipment(equipmentId,equipmentDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (EquipmentNotFound e) {
+            logger.error("Bad Request",e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error("Internal Server Error",e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
