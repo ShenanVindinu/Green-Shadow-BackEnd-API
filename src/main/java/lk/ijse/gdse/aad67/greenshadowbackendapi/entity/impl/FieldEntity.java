@@ -37,4 +37,7 @@ public class FieldEntity implements SuperEntity {
     @JoinColumn(name = "staff_id")
     private StaffEntity staff;
 
+    @OneToMany(mappedBy = "fieldId")
+    private List<EquipmentEntity> equipment;
+
 }
