@@ -23,6 +23,5 @@ public class FieldDTO {
     private String fieldImage2;
     private List<CropDTO> crops;
     private List<MonitoringLogEntity> monitoringLog;
-    private String staff;
 
 }

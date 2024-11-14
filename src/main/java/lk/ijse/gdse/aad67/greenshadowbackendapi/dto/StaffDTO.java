@@ -39,6 +39,5 @@ public class StaffDTO {
     private String vehicle;
     private List<EquipmentEntity> equipment;
     private List<MonitoringLogEntity> monitoringLog;
-    private List<FieldEntity> field;
 
 }

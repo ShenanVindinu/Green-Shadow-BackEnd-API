@@ -33,8 +33,4 @@ public class FieldEntity implements SuperEntity {
     @OneToMany(mappedBy = "field")
     private List<MonitoringLogEntity> monitoringLog;
 
-    @ManyToOne
-    @JoinColumn(name = "staff_id")
-    private StaffEntity staff;
-
 }
