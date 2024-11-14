@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 public class MonitoringLogDTO {
 
-    private String logCode;
+    private String logId;
     private Date logDate;
     private String logDetails;
     private String observedImage;
