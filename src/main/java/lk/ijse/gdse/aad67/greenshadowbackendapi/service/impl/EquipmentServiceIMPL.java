@@ -49,4 +49,24 @@ public class EquipmentServiceIMPL implements EquipmentService {
     public List<EquipmentDTO> getAllEquipment() {
         return mapping.asEquipmentDTOList(equipmentDAO.findAll());
     }
+
+    @Override
+    public void updateEquipment(String equipmentId, EquipmentDTO updatedEquipmentDTO) {
+        Optional<EquipmentEntity> equipmentEntity = equipmentDAO.findById(equipmentId);
+        updatedEquipmentDTO.setEquipmentId(equipmentId);
+        if (equipmentEntity.isPresent()) {
+            EquipmentEntity existingEquipment = equipmentEntity.get();
+
+            boolean isIdChanged = !equipmentId.equals(updatedEquipmentDTO.getEquipmentId());
+
+            if (isIdChanged) {
+                equipmentDAO.delete(existingEquipment);
+            }
+
+            EquipmentEntity newEquipment = mapping.toEquipmentEntity(updatedEquipmentDTO);
+            equipmentDAO.save(newEquipment);
+        } else {
+            throw new EquipmentNotFound("Equipment not found");
+        }
+    }
 }
