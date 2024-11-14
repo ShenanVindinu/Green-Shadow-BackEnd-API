@@ -21,7 +21,7 @@ import java.util.List;
 @Data
 public class StaffDTO {
 
-    private String id;
+    private String staffId;
     private String firstName;
     private String lastName;
     private String designation;
