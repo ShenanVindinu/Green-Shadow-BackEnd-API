@@ -25,5 +25,7 @@ public class MonitoringLogEntity implements SuperEntity {
     @Lob
     private String observedImage;
 
-
+    @ManyToOne
+    @JoinColumn(name = "field_id")
+    private FieldEntity field;
 }
