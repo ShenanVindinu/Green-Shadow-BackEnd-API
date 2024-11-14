@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
+
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 public class FieldDTO {
 
-    private String fieldCode;
+    private String fieldId;
     private String fieldName;
     private String fieldLocation;
     private Double extentSizeOfTheField;
