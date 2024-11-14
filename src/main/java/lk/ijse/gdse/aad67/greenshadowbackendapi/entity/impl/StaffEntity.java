@@ -52,6 +52,10 @@ public class StaffEntity implements SuperEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne
+    @JoinColumn(name = "vehicle_id")
+    private VehicleEntity vehicle;
+
 
 
 }
