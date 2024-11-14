@@ -56,6 +56,9 @@ public class StaffEntity implements SuperEntity {
     @JoinColumn(name = "vehicle_id")
     private VehicleEntity vehicle;
 
+    @OneToMany(mappedBy = "staffId")
+    private List<EquipmentEntity> equipment;
+
 
 
 }
