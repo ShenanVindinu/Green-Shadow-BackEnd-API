@@ -1,7 +1,7 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
 
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
+
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.MonitoringLogEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;

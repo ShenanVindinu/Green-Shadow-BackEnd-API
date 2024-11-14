@@ -1,14 +1,10 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.FieldEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.MonitoringLogEntity;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.VehicleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
