@@ -33,10 +33,4 @@ public class EquipmentEntity implements SuperEntity {
     @JoinColumn(name = "staff_id")
     private StaffEntity staffId;
 
-    @ManyToOne
-    @JoinColumn(name = "field_id")
-    private FieldEntity fieldId;
-
-
-
 }

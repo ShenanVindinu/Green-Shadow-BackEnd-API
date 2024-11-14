@@ -24,6 +24,5 @@ public class FieldDTO {
     private List<CropDTO> crops;
     private List<MonitoringLogEntity> monitoringLog;
     private String staff;
-    private List<EquipmentEntity> equipment;
 
 }
