@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dao.FieldDAO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.FieldDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.FieldEntity;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.FieldNotFound;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.FieldService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.Mapping;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -36,5 +38,15 @@ public class FieldServiceIMPL implements FieldService {
     @Override
     public List<FieldDTO> getAllFields() {
         return mapping.asFieldDTOList(fieldDAO.findAll());
+    }
+
+    @Override
+    public void deleteField(String fieldId) {
+        Optional<FieldEntity> fieldEntity = fieldDAO.findById(fieldId);
+        if (fieldEntity.isEmpty()) {
+            throw new FieldNotFound(fieldId+" field Not Found");
+        } else {
+            fieldDAO.deleteById(fieldId);
+        }
     }
 }
