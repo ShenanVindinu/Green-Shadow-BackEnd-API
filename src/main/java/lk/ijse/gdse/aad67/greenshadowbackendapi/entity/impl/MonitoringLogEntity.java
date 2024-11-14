@@ -25,12 +25,5 @@ public class MonitoringLogEntity implements SuperEntity {
     @Lob
     private String observedImage;
 
-    @OneToMany(mappedBy = "fieldCode")
-    private List<FieldEntity> field;
 
-    @OneToMany(mappedBy = "cropCode")
-    private List<CropEntity> crop;
-
-    @OneToMany(mappedBy = "staffId")
-    private List<StaffEntity> staff;
 }

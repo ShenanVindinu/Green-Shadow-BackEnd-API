@@ -14,17 +14,13 @@ import lombok.NoArgsConstructor;
 public class VehicleEntity implements SuperEntity {
 
     @Id
-    @Column(name = "vehicleCode")
+    @Column(name = "vehicle_Code")
     private String vehicleCode;
 
     private String licensePlateNumber;
     private String vehicleCategory;
     private String fuelType;
     private String status;
-
-    @ManyToOne
-    @JoinColumn(name = "allocated_Staff_Member_Detail")
-    private StaffEntity allocatedStaffMemberDetails;
 
     private String remarks;
 

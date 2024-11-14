@@ -14,7 +14,7 @@ import lombok.*;
 public class CropEntity implements SuperEntity {
 
     @Id
-    @Column(name = "cropCode")
+    @Column(name = "crop_Code")
     private String cropCode;
 
     private String cropCommonName;

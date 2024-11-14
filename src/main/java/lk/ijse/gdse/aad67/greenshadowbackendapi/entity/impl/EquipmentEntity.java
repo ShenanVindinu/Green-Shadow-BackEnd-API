@@ -29,13 +29,7 @@ public class EquipmentEntity implements SuperEntity {
     @Enumerated(EnumType.STRING)
     private EquipmentStatus equipmentStatus;
 
-    @OneToOne
-    @JoinColumn(name = "equipment_assigned_staff_id")
-    private StaffEntity assignedStaffDetails;
 
-    @OneToOne
-    @JoinColumn(name = "equipment_assigned_field_id")
-    private FieldEntity assignedFieldDetails;
 
 
 }

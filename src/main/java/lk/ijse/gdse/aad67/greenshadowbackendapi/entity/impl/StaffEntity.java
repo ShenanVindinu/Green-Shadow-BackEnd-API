@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "staff")
 public class StaffEntity implements SuperEntity {
     @Id
-    @Column(name = "staffId")
+    @Column(name = "staff_Id")
     private String staffId;
 
     private String firstName;
@@ -52,10 +52,6 @@ public class StaffEntity implements SuperEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "fieldCode")
-    private List<FieldEntity> field;
 
-    @OneToMany(mappedBy = "allocatedStaffMemberDetails")
-    private List<VehicleEntity> vehicle;
 
 }
