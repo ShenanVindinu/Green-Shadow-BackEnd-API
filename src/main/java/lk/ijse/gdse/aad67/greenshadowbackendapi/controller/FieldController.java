@@ -2,8 +2,10 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.FieldDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.FieldNotFound;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.FieldService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.AppUtil;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.util.RegexProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,23 @@ public class FieldController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FieldDTO> getAllFields() {
         return fieldService.getAllFields();
+    }
+
+    @DeleteMapping(value = "{fieldId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteField(@PathVariable("fieldId") String fieldId) {
+        try {
+            if (!RegexProcess.fieldIdMatcher(fieldId) || fieldId == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            fieldService.deleteField(fieldId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (FieldNotFound e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
