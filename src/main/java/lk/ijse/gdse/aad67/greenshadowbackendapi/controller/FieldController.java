@@ -1,18 +1,69 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 
+import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.FieldDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.service.FieldService;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.util.AppUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/field")
 public class FieldController {
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addField() {
-        return ResponseEntity.ok().build();
+    private final FieldService fieldService;
+
+    @Autowired
+    public FieldController(FieldService fieldService) {
+        this.fieldService = fieldService;
+    }
+
+    private static final Logger logger = LoggerFactory.getLogger(FieldController.class);
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> saveField(
+            @RequestPart("fieldName") String fieldName,
+            @RequestPart("fieldLocation") String fieldLocation,
+            @RequestPart("extentSizeOfTheField") String extentSizeOfTheField,
+            @RequestPart("fieldImage1") String fieldImage1,
+            @RequestPart("fieldImage2") String fieldImage2
+    ) {
+        String base64FieldPic1 = "";
+        String base64FieldPic2 = "";
+
+        try {
+            byte[] bytesFieldPic1 = fieldImage1.getBytes();
+            byte[] bytesFieldPic2 = fieldImage2.getBytes();
+            base64FieldPic1 = AppUtil.PicToBase64(bytesFieldPic1);
+            base64FieldPic2 = AppUtil.PicToBase64(bytesFieldPic2);
+
+            String FieldId = AppUtil.generateFieldId();
+
+            FieldDTO fieldDTO = new FieldDTO();
+            fieldDTO.setFieldId(FieldId);
+            fieldDTO.setFieldName(fieldName);
+            fieldDTO.setFieldLocation(fieldLocation);
+            fieldDTO.setExtentSizeOfTheField(Double.valueOf(extentSizeOfTheField));
+            fieldDTO.setFieldImage1(base64FieldPic1);
+            fieldDTO.setFieldImage2(base64FieldPic2);
+            fieldService.saveField(fieldDTO);
+            logger.info("Save field successfully");
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (DataPersistException e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
