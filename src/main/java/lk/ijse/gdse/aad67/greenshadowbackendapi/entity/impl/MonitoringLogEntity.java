@@ -16,8 +16,8 @@ import java.util.List;
 @Table(name = "monitoring_log")
 public class MonitoringLogEntity implements SuperEntity {
     @Id
-    @Column(name = "log_code")
-    private String logCode;
+    @Column(name = "log_id")
+    private String logId;
 
     private Date logDate;
     private String logDetails;

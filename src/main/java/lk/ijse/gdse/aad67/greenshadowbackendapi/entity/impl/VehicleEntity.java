@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class VehicleEntity implements SuperEntity {
 
     @Id
-    @Column(name = "vehicle_code")
-    private String vehicleCode;
+    @Column(name = "vehicle_id")
+    private String vehicleId;
 
     private String licensePlateNumber;
     private String vehicleCategory;

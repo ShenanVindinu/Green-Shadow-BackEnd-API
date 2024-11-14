@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 public class EquipmentEntity implements SuperEntity {
 
     @Id
-    @Column(name = "equipment_code")
-    private String equipmentCode;
+    @Column(name = "equipment_id")
+    private String equipmentId;
 
     private String equipmentName;
 

@@ -16,8 +16,8 @@ import java.util.List;
 @Table(name = "field")
 public class FieldEntity implements SuperEntity {
     @Id
-    @Column(name = "field_code")
-    private String fieldCode;
+    @Column(name = "field_id")
+    private String fieldId;
     private String fieldName;
     private String fieldLocation;
     private Double extentSizeOfTheField;
