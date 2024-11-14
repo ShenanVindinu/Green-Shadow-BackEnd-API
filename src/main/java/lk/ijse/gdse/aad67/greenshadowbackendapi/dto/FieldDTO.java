@@ -1,6 +1,8 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
 
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.MonitoringLogEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +19,11 @@ public class FieldDTO {
     private String fieldName;
     private String fieldLocation;
     private Double extentSizeOfTheField;
-    private List<CropDTO> crops;
-    private List<StaffDTO> staff;
     private String fieldImage1;
     private String fieldImage2;
+    private List<CropDTO> crops;
+    private List<MonitoringLogEntity> monitoringLog;
+    private String staff;
+    private List<EquipmentEntity> equipment;
 
 }
