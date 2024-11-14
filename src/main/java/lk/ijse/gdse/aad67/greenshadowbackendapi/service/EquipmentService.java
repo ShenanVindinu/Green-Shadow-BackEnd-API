@@ -10,4 +10,6 @@ public interface EquipmentService {
     void deleteEquipment(String equipmentId);
 
     List<EquipmentDTO> getAllEquipment();
+
+    void updateEquipment(String equipmentId, EquipmentDTO equipmentDTO);
 }
