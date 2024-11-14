@@ -72,7 +72,7 @@ public class CropController {
     @DeleteMapping(value = "/{cropId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteCrop(@PathVariable("cropId") String cropId) {
         try {
-            if (!RegexProcess.cropIdMatcher(cropId)) {
+            if (RegexProcess.cropIdMatcher(cropId)) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             cropService.deleteCrop(cropId);
@@ -113,7 +113,7 @@ public class CropController {
             updatedCropDto.setCropSeason(cropSeason);
             updatedCropDto.setFieldId(fieldId);
 
-            if (!RegexProcess.cropIdMatcher(cropId) || cropId == null) {
+            if (RegexProcess.cropIdMatcher(cropId) || cropId == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             cropService.updateCrop(cropId, updatedCropDto);
