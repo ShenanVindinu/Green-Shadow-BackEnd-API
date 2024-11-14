@@ -37,7 +37,7 @@ public class CropController {
             @RequestPart("cropImage") MultipartFile cropImage,
             @RequestPart("category") String category,
             @RequestPart("cropSeason") String cropSeason,
-            @RequestPart("fieldCode") String fieldCode
+            @RequestPart("fieldId") String fieldId
 
             ) {
         String base64CropPic = "";
@@ -55,8 +55,8 @@ public class CropController {
             cropDTO.setCropImage(base64CropPic);
             cropDTO.setCategory(category);
             cropDTO.setCropSeason(cropSeason);
-            cropDTO.setFieldCode(fieldCode);
-            logger.info(fieldCode);
+            cropDTO.setFieldId(fieldId);
+            logger.info(fieldId);
             cropService.saveCrop(cropDTO);
             logger.info("Crop Saved Successfully");
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -69,13 +69,13 @@ public class CropController {
         }
     }
 
-    @DeleteMapping(value = "/{cropCode}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteCrop(@PathVariable("cropCode") String cropCode) {
+    @DeleteMapping(value = "/{cropId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deleteCrop(@PathVariable("cropId") String cropId) {
         try {
-            if (!RegexProcess.cropIdMatcher(cropCode)) {
+            if (!RegexProcess.cropIdMatcher(cropId)) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            cropService.deleteCrop(cropCode);
+            cropService.deleteCrop(cropId);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (CropNotFoundException e) {
             logger.error("INTERNAL_SERVER_ERROR: Unexpected error", e);
@@ -89,14 +89,14 @@ public class CropController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrops() {return cropService.getAllCrops();}
 
-    @PutMapping(value = {"{cropCode}"},produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateCrop(@PathVariable("cropCode") String cropCode,
+    @PutMapping(value = {"{cropId}"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateCrop(@PathVariable("cropId") String cropId,
                                            @RequestPart("cropCommonName") String cropCommonName,
                                            @RequestPart("cropScientificName") String cropScientificName,
                                            @RequestPart("cropImage") MultipartFile cropImage,
                                            @RequestPart("category") String category,
                                            @RequestPart("cropSeason") String cropSeason,
-                                           @RequestPart("field") String field
+                                           @RequestPart("fieldId") String fieldId
     )
     {
         String base64CropPic = "";
@@ -105,18 +105,18 @@ public class CropController {
             base64CropPic = AppUtil.PicToBase64(bytesCropPic);
 
             CropDTO updatedCropDto = new CropDTO();
-            updatedCropDto.setCropId(cropCode);
+            updatedCropDto.setCropId(cropId);
             updatedCropDto.setCropCommonName(cropCommonName);
             updatedCropDto.setCropScientificName(cropScientificName);
             updatedCropDto.setCropImage(base64CropPic);
             updatedCropDto.setCategory(category);
             updatedCropDto.setCropSeason(cropSeason);
-            updatedCropDto.setFieldCode(field);
+            updatedCropDto.setFieldId(fieldId);
 
-            if (!RegexProcess.cropIdMatcher(cropCode) || cropCode == null) {
+            if (!RegexProcess.cropIdMatcher(cropId) || cropId == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            cropService.updateCrop(cropCode, updatedCropDto);
+            cropService.updateCrop(cropId, updatedCropDto);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (CropNotFoundException e) {
             logger.error("Crop Not Found",e);
