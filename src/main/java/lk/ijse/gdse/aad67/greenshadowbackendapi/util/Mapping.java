@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -59,5 +60,29 @@ public class Mapping {
         MonitoringLogEntity entity = modelMapper.map(monitoringLogDTO, MonitoringLogEntity.class);
         entity.setLogDate(LocalDate.parse(monitoringLogDTO.getLogDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         return entity;
+    }
+    public List<MonitoringLogDTO> asMonitoringLogDTOList(List<MonitoringLogEntity> monitoringLogEntities) {
+        List<MonitoringLogDTO> dtoList = new ArrayList<>();
+
+        for (MonitoringLogEntity entity : monitoringLogEntities) {
+            MonitoringLogDTO dto = new MonitoringLogDTO();
+
+
+            dto.setLogId(entity.getLogId());
+
+
+            dto.setLogDate(entity.getLogDate() != null ? entity.getLogDate().toString() : null);
+
+            dto.setLogDetails(entity.getLogDetails());
+            dto.setObservedImage(entity.getObservedImage());
+
+
+            dto.setField(entity.getField() != null ? entity.getField().getFieldName() : null);
+            dto.setStaff(entity.getStaff() != null ? entity.getStaff().getFirstName() : null);
+
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 }
