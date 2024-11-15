@@ -3,14 +3,20 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.util;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.EquipmentDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.FieldDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.MonitoringLogDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.CropEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.FieldEntity;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.MonitoringLogEntity;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
@@ -46,5 +52,12 @@ public class Mapping {
     }
     public List<FieldDTO> asFieldDTOList(List<FieldEntity> all) {
         return modelMapper.map(all, new TypeToken<List<FieldDTO>>() {}.getType());
+    }
+
+    //Monitoring Log
+    public MonitoringLogEntity toMonitoringLogEntity(MonitoringLogDTO monitoringLogDTO) {
+        MonitoringLogEntity entity = modelMapper.map(monitoringLogDTO, MonitoringLogEntity.class);
+        entity.setLogDate(LocalDate.parse(monitoringLogDTO.getLogDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        return entity;
     }
 }

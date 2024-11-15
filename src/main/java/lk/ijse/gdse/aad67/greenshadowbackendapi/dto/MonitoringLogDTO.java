@@ -1,6 +1,7 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,8 @@ import java.util.Date;
 public class MonitoringLogDTO {
 
     private String logId;
-    private Date logDate;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private String logDate;
     private String logDetails;
     private String observedImage;
     private String field;
