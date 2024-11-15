@@ -10,4 +10,6 @@ public interface MonitoringLogService {
     void deleteLog(String logId);
 
     List<MonitoringLogDTO> getAllLogs();
+
+    void updateLog(String logId,MonitoringLogDTO monitoringLogDTO);
 }
