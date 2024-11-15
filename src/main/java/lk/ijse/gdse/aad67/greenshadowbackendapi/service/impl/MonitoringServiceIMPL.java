@@ -2,6 +2,7 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.service.impl;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dao.MonitoringLogDAO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.MonitoringLogDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.CropEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.MonitoringLogEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.MonitoringLogService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.Mapping;
@@ -47,5 +48,17 @@ public class MonitoringServiceIMPL implements MonitoringLogService {
     @Override
     public List<MonitoringLogDTO> getAllLogs() {
         return mapping.asMonitoringLogDTOList(monitoringLogDAO.findAll());
+    }
+
+    @Override
+    public void updateLog(String logId, MonitoringLogDTO monitoringLogDTO) {
+        Optional<MonitoringLogEntity> monitoringLogEntity = monitoringLogDAO.findById(logId);
+        if (monitoringLogEntity.isPresent()) {
+            MonitoringLogEntity newMlog = mapping.toMonitoringLogEntity(monitoringLogDTO);
+            monitoringLogDAO.save(newMlog);
+        } else {
+            logger.warn("Log with id {} not found", logId);
+            throw new RuntimeException("Log with id " + logId + " not found");
+        }
     }
 }
