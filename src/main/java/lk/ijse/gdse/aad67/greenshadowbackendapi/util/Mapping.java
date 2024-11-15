@@ -1,9 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.util;
 
-import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.EquipmentDTO;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.FieldDTO;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.MonitoringLogDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -105,5 +102,10 @@ public class Mapping {
         }
 
         return dtoList;
+    }
+
+    //staff
+    public StaffEntity toStaffEntity(StaffDTO staffDTO) {
+        return modelMapper.map(staffDTO,StaffEntity.class);
     }
 }
