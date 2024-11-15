@@ -20,4 +20,10 @@ public class RegexProcess {
         Pattern pattern = Pattern.compile(regexForUserID);
         return pattern.matcher(fieldId).matches();
     }
+
+    public static boolean logIdMatcher(String logId) {
+        String regexForUserID = "^MONITORING-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        Pattern pattern = Pattern.compile(regexForUserID);
+        return pattern.matcher(logId).matches();
+    }
 }
