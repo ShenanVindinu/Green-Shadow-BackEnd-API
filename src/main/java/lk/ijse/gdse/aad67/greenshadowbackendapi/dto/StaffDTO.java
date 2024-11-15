@@ -1,6 +1,7 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +24,12 @@ public class StaffDTO {
     private String lastName;
     private String designation;
     private Gender gender;
-    private Date joinedDate;
-    private Date dob;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private LocalDate joinedDate;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private LocalDate dob;
+
     private String addressLine01;
     private String addressLine02;
     private String addressLine03;
