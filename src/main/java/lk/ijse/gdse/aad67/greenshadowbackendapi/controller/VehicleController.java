@@ -72,6 +72,25 @@ public class VehicleController {
 
     }
 
+    @DeleteMapping(value = "{vehicleId}")
+    public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleId") String vehicleId) {
+        try {
+            if (!RegexProcess.vehicleIdMatcher(vehicleId)) {
+                logger.warn("Vehicle id is not valid");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            vehicleService.deleteVehicle(vehicleId);
+            logger.info("Vehicle deleted");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (VehicleNotFoundException vehicleNotFoundException) {
+            logger.error(vehicleNotFoundException.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 
 
