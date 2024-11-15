@@ -8,4 +8,6 @@ public interface StaffService {
     void saveStaffMember(StaffDTO staffDTO);
 
     List<StaffDTO> getALLStaffMembers();
+
+    void deleteStaffMember(String staffId);
 }
