@@ -187,4 +187,8 @@ public class Mapping {
         return staffDTOList;
     }
 
+    //Vehicle
+    public VehicleEntity toVehicleEntity(VehicleDTO vehicleDTO) {
+        return modelMapper.map(vehicleDTO, VehicleEntity.class);
+    }
 }
