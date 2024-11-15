@@ -2,8 +2,10 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.MonitoringLogDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.LogNotFound;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.MonitoringLogService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.AppUtil;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.util.RegexProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class MonitoringLogController {
             base64ObservedImage = AppUtil.PicToBase64(observedImage.getBytes());
 
             MonitoringLogDTO monitoringLogDTO = new MonitoringLogDTO();
-            monitoringLogDTO.setLogId(AppUtil.generateMonitoringLogId());
+            monitoringLogDTO.setLogId(AppUtil.generateMonitoringId());
             monitoringLogDTO.setLogDate(logDate);
             monitoringLogDTO.setLogDetails(logDetails);
             monitoringLogDTO.setObservedImage(base64ObservedImage);
@@ -46,6 +48,24 @@ public class MonitoringLogController {
         } catch (DataPersistException e) {
             logger.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "{logId}")
+    public ResponseEntity<Void> deleteLog(@PathVariable("logId") String logId) {
+        try {
+            if (!RegexProcess.logIdMatcher(logId) || logId == null) {
+                logger.warn("Log id is not valid");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            monitoringLogService.deleteLog(logId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (LogNotFound e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
