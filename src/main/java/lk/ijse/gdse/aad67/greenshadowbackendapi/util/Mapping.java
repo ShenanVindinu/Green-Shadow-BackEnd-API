@@ -4,10 +4,7 @@ import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.EquipmentDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.FieldDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.MonitoringLogDTO;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.CropEntity;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.FieldEntity;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.MonitoringLogEntity;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +54,34 @@ public class Mapping {
 
     //Monitoring Log
     public MonitoringLogEntity toMonitoringLogEntity(MonitoringLogDTO monitoringLogDTO) {
-        MonitoringLogEntity entity = modelMapper.map(monitoringLogDTO, MonitoringLogEntity.class);
-        entity.setLogDate(LocalDate.parse(monitoringLogDTO.getLogDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        MonitoringLogEntity entity = new MonitoringLogEntity();
+
+        // Set basic properties
+        entity.setLogId(monitoringLogDTO.getLogId());
+        entity.setLogDetails(monitoringLogDTO.getLogDetails());
+        entity.setObservedImage(monitoringLogDTO.getObservedImage());
+
+        // Convert and set logDate
+        if (monitoringLogDTO.getLogDate() != null) {
+            entity.setLogDate(LocalDate.parse(monitoringLogDTO.getLogDate(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        }
+
+        // Set FieldEntity and StaffEntity
+        if (monitoringLogDTO.getField() != null) {
+            FieldEntity fieldEntity = new FieldEntity();
+            fieldEntity.setFieldId(monitoringLogDTO.getField());
+            entity.setField(fieldEntity);
+        }
+
+        if (monitoringLogDTO.getStaff() != null) {
+            StaffEntity staffEntity = new StaffEntity();
+            staffEntity.setStaffId(monitoringLogDTO.getStaff());
+            entity.setStaff(staffEntity);
+        }
+
         return entity;
     }
+
     public List<MonitoringLogDTO> asMonitoringLogDTOList(List<MonitoringLogEntity> monitoringLogEntities) {
         List<MonitoringLogDTO> dtoList = new ArrayList<>();
 
