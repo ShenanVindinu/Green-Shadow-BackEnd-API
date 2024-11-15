@@ -66,4 +66,29 @@ public class StaffController {
         }
     }
 
+    @PutMapping(value = "{staffId}")
+    public ResponseEntity<Void> updateStaffMember(@PathVariable("staffId") String staffId,
+                                                  @RequestBody StaffDTO staffDTO)
+    {
+        try {
+            logger.info(staffDTO.toString());
+            if (!RegexProcess.staffIdMatcher(staffId) || staffId == null) {
+                logger.info("staffId don't match");
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            } else {
+                staffService.updateStaffMember(staffId, staffDTO);
+                logger.info("staff updated");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+        } catch (StaffNotFoundException e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+
 }
