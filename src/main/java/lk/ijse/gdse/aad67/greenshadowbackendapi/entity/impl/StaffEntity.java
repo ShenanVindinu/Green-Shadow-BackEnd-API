@@ -1,5 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +30,10 @@ public class StaffEntity implements SuperEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private Date joinedDate;
-    private Date dob;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private LocalDate joinedDate;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+    private LocalDate dob;
 
     @Column(name = "building_no")
     private String addressLine01;
