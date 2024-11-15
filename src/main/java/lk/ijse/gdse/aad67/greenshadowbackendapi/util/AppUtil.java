@@ -22,9 +22,6 @@ public class AppUtil {
     public static String generateStaffId(){
         return "STAFF-"+UUID.randomUUID();
     }
-    public static String generateMonitoringLogId(){
-        return "MonitoringLOG-"+UUID.randomUUID();
-    }
     public static String generateVehicleId(){
         return "Vehicle-"+UUID.randomUUID();
     }
