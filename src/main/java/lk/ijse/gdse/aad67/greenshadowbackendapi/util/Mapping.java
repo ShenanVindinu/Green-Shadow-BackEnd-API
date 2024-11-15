@@ -108,4 +108,48 @@ public class Mapping {
     public StaffEntity toStaffEntity(StaffDTO staffDTO) {
         return modelMapper.map(staffDTO,StaffEntity.class);
     }
+    public List<StaffDTO> asStaffDTOList(List<StaffEntity> staffEntities) {
+        List<StaffDTO> staffDTOList = new ArrayList<>();
+
+        for (StaffEntity entity : staffEntities) {
+            StaffDTO dto = new StaffDTO();
+
+            // Map basic properties
+            dto.setStaffId(entity.getStaffId());
+            dto.setFirstName(entity.getFirstName());
+            dto.setLastName(entity.getLastName());
+            dto.setDesignation(entity.getDesignation());
+            dto.setGender(entity.getGender());
+            dto.setJoinedDate(entity.getJoinedDate());
+            dto.setDob(entity.getDob());
+            dto.setAddressLine01(entity.getAddressLine01());
+            dto.setAddressLine02(entity.getAddressLine02());
+            dto.setAddressLine03(entity.getAddressLine03());
+            dto.setAddressLine04(entity.getAddressLine04());
+            dto.setAddressLine05(entity.getAddressLine05());
+            dto.setContactNumber(entity.getContactNumber());
+            dto.setEmail(entity.getEmail());
+            dto.setRole(entity.getRole());
+
+
+            if (entity.getVehicle() != null) {
+                dto.setVehicle(entity.getVehicle().getVehicleId());
+            }
+
+
+            if (entity.getEquipment() != null) {
+                dto.setEquipment(entity.getEquipment());
+            }
+
+
+            if (entity.getMonitoringLog() != null) {
+                dto.setMonitoringLog(entity.getMonitoringLog());
+            }
+
+            staffDTOList.add(dto);
+        }
+
+        return staffDTOList;
+    }
+
 }

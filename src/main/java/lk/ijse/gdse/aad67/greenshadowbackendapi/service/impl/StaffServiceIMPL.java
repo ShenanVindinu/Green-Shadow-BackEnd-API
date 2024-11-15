@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StaffServiceIMPL implements StaffService {
 
@@ -28,5 +30,10 @@ public class StaffServiceIMPL implements StaffService {
     public void saveStaffMember(StaffDTO staffDTO) {
         staffDTO.setStaffId(AppUtil.generateStaffId());
         staffDAO.save(mapping.toStaffEntity(staffDTO));
+    }
+
+    @Override
+    public List<StaffDTO> getALLStaffMembers() {
+        return mapping.asStaffDTOList(staffDAO.findAll());
     }
 }
