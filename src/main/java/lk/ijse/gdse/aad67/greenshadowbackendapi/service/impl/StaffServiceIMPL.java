@@ -49,4 +49,20 @@ public class StaffServiceIMPL implements StaffService {
             throw new RuntimeException("Staff with id " + staffId + " not found");
         }
     }
+
+    @Override
+    public void updateStaffMember(String staffId, StaffDTO updatedStaffDTO) {
+        Optional<StaffEntity> staffEntity = staffDAO.findById(staffId);
+        if (staffEntity.isPresent()) {
+            updatedStaffDTO.setStaffId(staffId);
+            StaffEntity staff = staffEntity.get();
+            boolean isIdChanged = !staffId.equals(updatedStaffDTO.getStaffId());
+
+            if (isIdChanged) {
+                staffDAO.delete(staff);
+            }
+            StaffEntity updatedStaffEntity = mapping.toStaffEntity(updatedStaffDTO);
+            staffDAO.save(updatedStaffEntity);
+        }
+    }
 }
