@@ -21,6 +21,8 @@ public class VehicleEntity implements SuperEntity {
     private String licensePlateNumber;
     private String vehicleCategory;
     private String fuelType;
+
+    @Enumerated(EnumType.STRING)
     private VehicleStatus status;
 
     private String remarks;
