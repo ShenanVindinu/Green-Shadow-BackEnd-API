@@ -1,5 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.VehicleStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ public class VehicleDTO {
     private String licensePlateNumber;
     private String vehicleCategory;
     private String fuelType;
-    private String status;
+    private VehicleStatus status;
     private String remarks;
 
 }
