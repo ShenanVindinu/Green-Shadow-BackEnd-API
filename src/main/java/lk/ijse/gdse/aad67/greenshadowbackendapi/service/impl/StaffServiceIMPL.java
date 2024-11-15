@@ -2,6 +2,7 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.service.impl;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dao.StaffDAO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.StaffDTO;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.StaffEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.StaffService;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.AppUtil;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.util.Mapping;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StaffServiceIMPL implements StaffService {
@@ -18,7 +20,7 @@ public class StaffServiceIMPL implements StaffService {
     private final StaffDAO staffDAO;
     private final Mapping mapping;
 
-    private final Logger log = LoggerFactory.getLogger(StaffServiceIMPL.class);
+    private final Logger logger = LoggerFactory.getLogger(StaffServiceIMPL.class);
 
     @Autowired
     public StaffServiceIMPL(StaffDAO staffDAO, Mapping mapping) {
@@ -35,5 +37,16 @@ public class StaffServiceIMPL implements StaffService {
     @Override
     public List<StaffDTO> getALLStaffMembers() {
         return mapping.asStaffDTOList(staffDAO.findAll());
+    }
+
+    @Override
+    public void deleteStaffMember(String staffId) {
+        Optional<StaffEntity> staffEntity = staffDAO.findById(staffId);
+        if (staffEntity.isPresent()) {
+            staffDAO.deleteById(staffId);
+        } else {
+            logger.warn("Staff with id {} not found", staffId);
+            throw new RuntimeException("Staff with id " + staffId + " not found");
+        }
     }
 }
