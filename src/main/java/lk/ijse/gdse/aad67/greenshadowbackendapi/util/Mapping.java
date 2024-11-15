@@ -106,7 +106,42 @@ public class Mapping {
 
     //staff
     public StaffEntity toStaffEntity(StaffDTO staffDTO) {
-        return modelMapper.map(staffDTO,StaffEntity.class);
+        StaffEntity entity = new StaffEntity();
+
+        // Map basic properties
+        entity.setStaffId(staffDTO.getStaffId());
+        entity.setFirstName(staffDTO.getFirstName());
+        entity.setLastName(staffDTO.getLastName());
+        entity.setDesignation(staffDTO.getDesignation());
+        entity.setGender(staffDTO.getGender());
+        entity.setJoinedDate(staffDTO.getJoinedDate());
+        entity.setDob(staffDTO.getDob());
+        entity.setAddressLine01(staffDTO.getAddressLine01());
+        entity.setAddressLine02(staffDTO.getAddressLine02());
+        entity.setAddressLine03(staffDTO.getAddressLine03());
+        entity.setAddressLine04(staffDTO.getAddressLine04());
+        entity.setAddressLine05(staffDTO.getAddressLine05());
+        entity.setContactNumber(staffDTO.getContactNumber());
+        entity.setEmail(staffDTO.getEmail());
+        entity.setRole(staffDTO.getRole());
+
+
+        if (staffDTO.getVehicle() != null) {
+            VehicleEntity vehicleEntity = new VehicleEntity();
+            vehicleEntity.setVehicleId(staffDTO.getVehicle());
+            entity.setVehicle(vehicleEntity);
+        }
+
+
+        if (staffDTO.getEquipment() != null) {
+            entity.setEquipment(staffDTO.getEquipment());
+        }
+
+        if (staffDTO.getMonitoringLog() != null) {
+            entity.setMonitoringLog(staffDTO.getMonitoringLog());
+        }
+
+        return entity;
     }
     public List<StaffDTO> asStaffDTOList(List<StaffEntity> staffEntities) {
         List<StaffDTO> staffDTOList = new ArrayList<>();
