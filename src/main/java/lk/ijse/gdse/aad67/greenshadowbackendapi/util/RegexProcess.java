@@ -32,4 +32,10 @@ public class RegexProcess {
         Pattern pattern = Pattern.compile(regexForUserID);
         return pattern.matcher(staffId).matches();
     }
+
+    public static boolean vehicleIdMatcher(String vehicleId) {
+        String regexForUserID = "^VEHICLE-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        Pattern pattern = Pattern.compile(regexForUserID);
+        return pattern.matcher(vehicleId).matches();
+    }
 }

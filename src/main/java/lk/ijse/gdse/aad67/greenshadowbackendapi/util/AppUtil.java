@@ -23,7 +23,7 @@ public class AppUtil {
         return "STAFF-"+UUID.randomUUID();
     }
     public static String generateVehicleId(){
-        return "Vehicle-"+UUID.randomUUID();
+        return "VEHICLE-"+UUID.randomUUID();
     }
 
     public static String PicToBase64(byte[] bytesCropPic) {
