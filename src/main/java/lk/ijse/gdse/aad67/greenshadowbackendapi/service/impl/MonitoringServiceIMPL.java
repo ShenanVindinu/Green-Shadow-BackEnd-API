@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -41,5 +42,10 @@ public class MonitoringServiceIMPL implements MonitoringLogService {
             logger.warn("Log with id {} not found", logId);
             throw new RuntimeException("Log with id " + logId + " not found");
         }
+    }
+
+    @Override
+    public List<MonitoringLogDTO> getAllLogs() {
+        return mapping.asMonitoringLogDTOList(monitoringLogDAO.findAll());
     }
 }
