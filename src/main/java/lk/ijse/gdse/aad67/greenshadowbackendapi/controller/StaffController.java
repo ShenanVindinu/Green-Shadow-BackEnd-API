@@ -3,7 +3,9 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.StaffDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.StaffEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.StaffNotFoundException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.StaffService;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.util.RegexProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,24 @@ public class StaffController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getStaffMembers() {
         return staffService.getALLStaffMembers();
+    }
+
+    @DeleteMapping(value = "{staffId}")
+    public ResponseEntity<Void> deleteStaffMember(@PathVariable String staffId) {
+        try {
+            if (!RegexProcess.staffIdMatcher(staffId) || staffId == null) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            staffService.deleteStaffMember(staffId);
+            logger.info("staff deleted");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (StaffNotFoundException e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
