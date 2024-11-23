@@ -17,7 +17,6 @@ public class MonitoringLogDTO {
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private String logDate;
     private String logDetails;
-    private String observedImage;
     private String field;
     private String staff;
 

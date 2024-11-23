@@ -25,9 +25,6 @@ public class MonitoringLogEntity implements SuperEntity {
     private LocalDate logDate;
     private String logDetails;
 
-    @Lob
-    private String observedImage;
-
     @ManyToOne
     @JoinColumn(name = "field_id")
     private FieldEntity field;

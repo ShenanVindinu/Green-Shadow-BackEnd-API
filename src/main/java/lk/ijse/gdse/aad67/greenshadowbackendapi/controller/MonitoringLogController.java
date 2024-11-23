@@ -33,18 +33,13 @@ public class MonitoringLogController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveLog( @RequestPart("logDate") String logDate,
-                                         @RequestPart("logDetails") String logDetails,
-                                         @RequestPart("observedImage") String observedImage
+                                         @RequestPart("logDetails") String logDetails
     ) {
-        String base64ObservedImage = "";
         try {
-            base64ObservedImage = AppUtil.PicToBase64(observedImage.getBytes());
-
             MonitoringLogDTO monitoringLogDTO = new MonitoringLogDTO();
             monitoringLogDTO.setLogId(AppUtil.generateMonitoringId());
             monitoringLogDTO.setLogDate(logDate);
             monitoringLogDTO.setLogDetails(logDetails);
-            monitoringLogDTO.setObservedImage(base64ObservedImage);
             monitoringLogService.saveLog(monitoringLogDTO);
             logger.info("Save log successful");
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -83,19 +78,16 @@ public class MonitoringLogController {
     @PutMapping(value = "{logId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateLog(@PathVariable String logId,
                                           @RequestPart("logDetails") String logDetails,
-                                          @RequestPart("observedImage") String observedImage,
                                           @RequestPart("logDate") String logDate,
                                           @RequestPart("field") String field,
                                           @RequestPart("staff") String staff
     ) {
-        String base64ObservedImage = "";
+
         try {
-            base64ObservedImage = AppUtil.PicToBase64(observedImage.getBytes());
             MonitoringLogDTO monitoringLogDTO = new MonitoringLogDTO();
             monitoringLogDTO.setLogId(logId);
             monitoringLogDTO.setLogDate(logDate);
             monitoringLogDTO.setLogDetails(logDetails);
-            monitoringLogDTO.setObservedImage(base64ObservedImage);
             monitoringLogDTO.setField(field);
             monitoringLogDTO.setStaff(staff);
 

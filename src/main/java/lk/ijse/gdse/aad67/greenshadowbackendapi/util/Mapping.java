@@ -56,7 +56,6 @@ public class Mapping {
         // Set basic properties
         entity.setLogId(monitoringLogDTO.getLogId());
         entity.setLogDetails(monitoringLogDTO.getLogDetails());
-        entity.setObservedImage(monitoringLogDTO.getObservedImage());
 
         // Convert and set logDate
         if (monitoringLogDTO.getLogDate() != null) {
@@ -92,7 +91,6 @@ public class Mapping {
             dto.setLogDate(entity.getLogDate() != null ? entity.getLogDate().toString() : null);
 
             dto.setLogDetails(entity.getLogDetails());
-            dto.setObservedImage(entity.getObservedImage());
 
 
             dto.setField(entity.getField() != null ? entity.getField().getFieldName() : null);
