@@ -15,12 +15,11 @@ import lombok.NoArgsConstructor;
 public class UserEntity implements SuperEntity {
 
     @Id
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     private String password;
 
-    @Column(unique = true)
     @Enumerated(EnumType.STRING)
     private Role role;
 
