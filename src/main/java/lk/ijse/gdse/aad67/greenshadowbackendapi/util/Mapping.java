@@ -7,8 +7,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -192,4 +190,14 @@ public class Mapping {
     public List<VehicleDTO> asVehicleEntity(List<VehicleEntity> vehicleEntities) {
         return modelMapper.map(vehicleEntities, new TypeToken<List<VehicleDTO>>() {}.getType());
     }
+
+    //User
+    public UserEntity toUserEntity(UserDTO userDTO) {
+        return modelMapper.map(userDTO, UserEntity.class);
+    }
+
+    public void asUserEntity(UserDTO updatedUserDTO, UserEntity existingUser) {
+        modelMapper.map(updatedUserDTO, existingUser);
+    }
+
 }
