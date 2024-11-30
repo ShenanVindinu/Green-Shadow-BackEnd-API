@@ -4,34 +4,40 @@ import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.UserDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.secure.JWTAuthResponse;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.secure.SignIn;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.AuthService;
+import lk.ijse.gdse.aad67.greenshadowbackendapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("api/v1/auth")
+@RequestMapping("api/v1/user")
 @RestController
 @RequiredArgsConstructor
-public class AuthUserController {
+public class UserController {
 
-    private final AuthService authService;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping(value = "signup", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+    @PutMapping(value = "userUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JWTAuthResponse> saveUser(
-        @RequestPart("email") String email,
-        @RequestPart("password") String password
+    public ResponseEntity<JWTAuthResponse> updateUser(
+            @RequestPart("email") String email,
+            @RequestPart("password") String password,
+            @RequestPart("role") String role
     ) {
         try {
             UserDTO buildUserDTO = new UserDTO();
             buildUserDTO.setEmail(email);
             buildUserDTO.setPassword(passwordEncoder.encode(password));
-            return ResponseEntity.ok(authService.signUp(buildUserDTO));
+            buildUserDTO.setRole(Role.valueOf(role));
+            userService.updateUser(buildUserDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (DataPersistException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -39,15 +45,6 @@ public class AuthUserController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @PostMapping(value = "signin",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<JWTAuthResponse> signIn(@RequestBody SignIn signIn){
-        return ResponseEntity.ok(authService.signIn(signIn));
-    }
-    @PostMapping("refresh")
-    public ResponseEntity<JWTAuthResponse> refreshToken(@RequestParam ("existingToken") String existingToken) {
-        return ResponseEntity.ok(authService.refreshToken(existingToken));
     }
 
 }

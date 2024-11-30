@@ -41,19 +41,4 @@ public class AuthServiceIMPL implements AuthService {
         return null;
     }
 
-    @Override
-    public void updateUser(UserDTO updatedUserDTO) {
-        Optional<UserEntity> existingUserOptional = userDAO.findById(updatedUserDTO.getEmail());
-
-        if (existingUserOptional.isPresent()) {
-            UserEntity existingUser = existingUserOptional.get();
-
-            mapping.asUserEntity(updatedUserDTO, existingUser);
-
-            userDAO.save(existingUser);
-        } else {
-            throw new UserNotFoundException("User with email " + updatedUserDTO.getEmail() + " not found.");
-        }
-    }
-
 }
