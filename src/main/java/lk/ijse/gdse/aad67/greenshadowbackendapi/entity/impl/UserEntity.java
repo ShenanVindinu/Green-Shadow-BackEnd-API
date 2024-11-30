@@ -23,7 +23,7 @@ import java.util.Set;
 public class UserEntity implements SuperEntity, UserDetails {
 
     @Id
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
     private String password;
