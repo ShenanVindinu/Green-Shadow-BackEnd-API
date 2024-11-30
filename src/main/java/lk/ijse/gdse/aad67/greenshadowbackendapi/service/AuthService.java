@@ -8,6 +8,5 @@ public interface AuthService {
     JWTAuthResponse signIn(SignIn signIn);
     JWTAuthResponse signUp(UserDTO userDTO);
     JWTAuthResponse refreshToken(String accessToken);
-
-    JWTAuthResponse signup(UserDTO buildUserDTO);
+    void updateUser(UserDTO buildUserDTO);
 }
