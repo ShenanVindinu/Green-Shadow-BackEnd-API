@@ -31,6 +31,9 @@ public class AuthUserController {
             UserDTO buildUserDTO = new UserDTO();
             buildUserDTO.setEmail(email);
             buildUserDTO.setPassword(passwordEncoder.encode(password));
+            if (buildUserDTO.getRole() == null) {
+                buildUserDTO.setRole(Role.OTHER);
+            }
             return ResponseEntity.ok(authService.signUp(buildUserDTO));
         } catch (DataPersistException e) {
             e.printStackTrace();
