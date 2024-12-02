@@ -200,4 +200,8 @@ public class Mapping {
         modelMapper.map(updatedUserDTO, existingUser);
     }
 
+
+    public List<UserDTO> asUserEntities(List<UserEntity> userEntities) {
+        return modelMapper.map(userEntities, new TypeToken<List<UserDTO>>() {}.getType());
+    }
 }
