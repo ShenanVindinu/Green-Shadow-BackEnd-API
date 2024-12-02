@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,6 +45,11 @@ public class UserServiceIMPL implements UserService {
         } else {
             throw new UserNotFoundException("User with email " + updatedUserDTO.getEmail() + " not found.");
         }
+    }
+
+    @Override
+    public List<UserDTO> getAllusers() {
+        return mapping.asUserEntities(userDAO.findAll());
     }
 
 }
