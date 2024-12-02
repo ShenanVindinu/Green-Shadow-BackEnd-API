@@ -1,5 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 
+import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.CropDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.UserDTO;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
@@ -11,10 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("api/v1/user")
 @RestController
@@ -46,5 +46,8 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "getAllUsers", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserDTO> getAllCrops() {return userService.getAllusers();}
 
 }
