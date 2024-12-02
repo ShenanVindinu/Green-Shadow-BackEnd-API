@@ -44,7 +44,7 @@ public class AuthUserController {
         }
     }
 
-    @PostMapping(value = "signin",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "signing",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JWTAuthResponse> signIn(@RequestBody SignIn signIn){
         return ResponseEntity.ok(authService.signIn(signIn));
     }
