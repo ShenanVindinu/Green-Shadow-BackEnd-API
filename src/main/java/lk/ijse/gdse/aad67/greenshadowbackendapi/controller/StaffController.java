@@ -29,7 +29,7 @@ public class StaffController {
         this.staffService = staffService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveStaffMember(@RequestBody StaffDTO staffDTO) {
         try {
@@ -45,13 +45,13 @@ public class StaffController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getStaffMembers() {
         return staffService.getALLStaffMembers();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @DeleteMapping(value = "{staffId}")
     public ResponseEntity<Void> deleteStaffMember(@PathVariable String staffId) {
         try {
@@ -70,7 +70,7 @@ public class StaffController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @PutMapping(value = "{staffId}")
     public ResponseEntity<Void> updateStaffMember(@PathVariable("staffId") String staffId,
                                                   @RequestBody StaffDTO staffDTO)
