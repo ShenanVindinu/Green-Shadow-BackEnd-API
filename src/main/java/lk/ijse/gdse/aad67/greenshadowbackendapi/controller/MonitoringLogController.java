@@ -32,7 +32,7 @@ public class MonitoringLogController {
         this.monitoringLogService = monitoringLogService;
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveLog( @RequestPart("logDate") String logDate,
                                          @RequestPart("logDetails") String logDetails
@@ -54,7 +54,7 @@ public class MonitoringLogController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping(value = "{logId}")
     public ResponseEntity<Void> deleteLog(@PathVariable("logId") String logId) {
         try {
@@ -73,13 +73,13 @@ public class MonitoringLogController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping
     public List<MonitoringLogDTO> getAllLogs() {
         return monitoringLogService.getAllLogs();
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PutMapping(value = "{logId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateLog(@PathVariable String logId,
                                           @RequestPart("logDetails") String logDetails,
