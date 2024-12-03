@@ -25,7 +25,7 @@ public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @PutMapping(value = "userUpdate", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JWTAuthResponse> updateUser(
@@ -49,7 +49,7 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @GetMapping(value = "getAllUsers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> getAllCrops() {return userService.getAllusers();}
 
