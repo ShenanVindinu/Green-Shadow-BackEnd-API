@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class StaffController {
         this.staffService = staffService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveStaffMember(@RequestBody StaffDTO staffDTO) {
         try {
@@ -43,11 +45,13 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getStaffMembers() {
         return staffService.getALLStaffMembers();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "{staffId}")
     public ResponseEntity<Void> deleteStaffMember(@PathVariable String staffId) {
         try {
@@ -66,6 +70,7 @@ public class StaffController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "{staffId}")
     public ResponseEntity<Void> updateStaffMember(@PathVariable("staffId") String staffId,
                                                   @RequestBody StaffDTO staffDTO)
