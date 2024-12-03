@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class MonitoringLogController {
         this.monitoringLogService = monitoringLogService;
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveLog( @RequestPart("logDate") String logDate,
                                          @RequestPart("logDetails") String logDetails
@@ -52,6 +54,7 @@ public class MonitoringLogController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping(value = "{logId}")
     public ResponseEntity<Void> deleteLog(@PathVariable("logId") String logId) {
         try {
@@ -70,11 +73,13 @@ public class MonitoringLogController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping
     public List<MonitoringLogDTO> getAllLogs() {
         return monitoringLogService.getAllLogs();
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PutMapping(value = "{logId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateLog(@PathVariable String logId,
                                           @RequestPart("logDetails") String logDetails,
