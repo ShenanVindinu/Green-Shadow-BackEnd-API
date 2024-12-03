@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class EquipmentController {
 
     private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveEquipment(@RequestBody EquipmentDTO equipmentDTO) {
         try {
@@ -46,11 +48,13 @@ public class EquipmentController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EquipmentDTO> getAllEquipment() {
             return equipmentService.getAllEquipment();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = "{equipmentId}")
     public ResponseEntity<Void> deleteEquipment( @PathVariable("equipmentId") String equipmentId) {
         try {
@@ -66,6 +70,7 @@ public class EquipmentController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = "{equipmentId}")
     public ResponseEntity<Void> updateEquipment( @PathVariable("equipmentId") String equipmentId,
                                                  @RequestBody EquipmentDTO equipmentDTO ) {
