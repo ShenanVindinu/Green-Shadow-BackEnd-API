@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +34,7 @@ public class CropController {
 
     private static final Logger logger = LoggerFactory.getLogger(CropController.class);
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveCrop(
             @RequestPart("cropCommonName") String cropCommonName,
@@ -69,6 +71,7 @@ public class CropController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @DeleteMapping(value = "/{cropId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteCrop(@PathVariable("cropId") String cropId) {
         try {
@@ -86,9 +89,11 @@ public class CropController {
         }
     }
 
+    @PreAuthorize("hasRole('MANAGER')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrops() {return cropService.getAllCrops();}
 
+    @PreAuthorize("hasRole('MANAGER')")
     @PutMapping(value = {"{cropId}"},produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateCrop(@PathVariable("cropId") String cropId,
                                            @RequestPart("cropCommonName") String cropCommonName,
