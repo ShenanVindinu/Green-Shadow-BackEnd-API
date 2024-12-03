@@ -30,7 +30,7 @@ public class FieldController {
 
     private static final Logger logger = LoggerFactory.getLogger(FieldController.class);
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveField(
             @RequestPart("fieldName") String fieldName,
@@ -69,13 +69,13 @@ public class FieldController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FieldDTO> getAllFields() {
         return fieldService.getAllFields();
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping(value = "{fieldId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteField(@PathVariable("fieldId") String fieldId) {
         try {
@@ -93,7 +93,7 @@ public class FieldController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PutMapping(value = "{fieldId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateField(@PathVariable("fieldId") String fieldId,
                                             @RequestPart("fieldName") String fieldName,
