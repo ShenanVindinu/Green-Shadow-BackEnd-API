@@ -30,7 +30,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveVehicle(@RequestBody VehicleDTO vehicleDTO) {
         try {
@@ -46,13 +46,13 @@ public class VehicleController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @GetMapping
     public List<VehicleDTO> getAllVehicles() {
         return vehicleService.getAllVehicles();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @PutMapping(value = "{vehicleId}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateVehicle(@PathVariable("vehicleId") String vehicleId,
                                               @RequestBody VehicleDTO vehicleDTO
@@ -76,7 +76,7 @@ public class VehicleController {
 
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
     @DeleteMapping(value = "{vehicleId}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleId") String vehicleId) {
         try {
