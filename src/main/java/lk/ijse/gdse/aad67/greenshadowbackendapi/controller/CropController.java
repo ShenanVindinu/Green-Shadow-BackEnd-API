@@ -34,7 +34,7 @@ public class CropController {
 
     private static final Logger logger = LoggerFactory.getLogger(CropController.class);
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveCrop(
             @RequestPart("cropCommonName") String cropCommonName,
@@ -71,7 +71,7 @@ public class CropController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping(value = "/{cropId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteCrop(@PathVariable("cropId") String cropId) {
         try {
@@ -89,7 +89,7 @@ public class CropController {
         }
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrops() {return cropService.getAllCrops();}
 
