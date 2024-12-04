@@ -4,38 +4,38 @@ import java.util.regex.Pattern;
 
 public class RegexProcess {
     public static boolean cropIdMatcher(String cropId) {
-        String regexForUserID = "^CROP-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        String regexForUserID = "^CROP-[a-f0-9]{5}$";
         Pattern pattern = Pattern.compile(regexForUserID);
         return !pattern.matcher(cropId).matches();
     }
 
     public static boolean equipmentIdMatcher(String equipmentId) {
-        String regexForUserID = "^EQUIPMENT-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        String regexForUserID = "^EQUIPMENT-[a-f0-9]{5}$";
         Pattern pattern = Pattern.compile(regexForUserID);
         return pattern.matcher(equipmentId).matches();
     }
 
     public static boolean fieldIdMatcher(String fieldId) {
-        String regexForUserID = "^FIELD-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        String regexForUserID = "^FIELD-[a-f0-9]{5}$";
         Pattern pattern = Pattern.compile(regexForUserID);
-        return pattern.matcher(fieldId).matches();
+        return !pattern.matcher(fieldId).matches();
     }
 
     public static boolean logIdMatcher(String logId) {
-        String regexForUserID = "^MONITORING-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        String regexForUserID = "^MONITORING-[a-f0-9]{5}$";
         Pattern pattern = Pattern.compile(regexForUserID);
-        return pattern.matcher(logId).matches();
+        return !pattern.matcher(logId).matches();
     }
 
     public static boolean staffIdMatcher(String staffId) {
-        String regexForUserID = "^STAFF-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        String regexForUserID = "^STAFF-[a-f0-9]{5}$";
         Pattern pattern = Pattern.compile(regexForUserID);
-        return pattern.matcher(staffId).matches();
+        return !pattern.matcher(staffId).matches();
     }
 
     public static boolean vehicleIdMatcher(String vehicleId) {
-        String regexForUserID = "^VEHICLE-[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
+        String regexForUserID = "^VEHICLE-[a-f0-9]{5}$";
         Pattern pattern = Pattern.compile(regexForUserID);
-        return pattern.matcher(vehicleId).matches();
+        return !pattern.matcher(vehicleId).matches();
     }
 }
