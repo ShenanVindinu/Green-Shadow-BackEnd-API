@@ -1,7 +1,6 @@
 package lk.ijse.gdse.aad67.greenshadowbackendapi.controller;
 
 import lk.ijse.gdse.aad67.greenshadowbackendapi.dto.StaffDTO;
-import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.StaffEntity;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.exception.StaffNotFoundException;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.service.StaffService;
@@ -55,7 +54,7 @@ public class StaffController {
     @DeleteMapping(value = "{staffId}")
     public ResponseEntity<Void> deleteStaffMember(@PathVariable String staffId) {
         try {
-            if (!RegexProcess.staffIdMatcher(staffId) || staffId == null) {
+            if (RegexProcess.staffIdMatcher(staffId) || staffId == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             staffService.deleteStaffMember(staffId);
@@ -77,7 +76,7 @@ public class StaffController {
     {
         try {
             logger.info(staffDTO.toString());
-            if (!RegexProcess.staffIdMatcher(staffId) || staffId == null) {
+            if (RegexProcess.staffIdMatcher(staffId) || staffId == null) {
                 logger.info("staffId don't match");
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             } else {
