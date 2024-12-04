@@ -59,7 +59,7 @@ public class VehicleController {
     )
     {
         try {
-            if (!RegexProcess.vehicleIdMatcher(vehicleId) || vehicleId == null) {
+            if (RegexProcess.vehicleIdMatcher(vehicleId) || vehicleId == null) {
                 logger.warn("Vehicle id is not valid");
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
@@ -80,7 +80,7 @@ public class VehicleController {
     @DeleteMapping(value = "{vehicleId}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleId") String vehicleId) {
         try {
-            if (!RegexProcess.vehicleIdMatcher(vehicleId)) {
+            if (RegexProcess.vehicleIdMatcher(vehicleId)) {
                 logger.warn("Vehicle id is not valid");
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
