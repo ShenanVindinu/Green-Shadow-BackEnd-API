@@ -79,7 +79,7 @@ public class FieldController {
     @DeleteMapping(value = "{fieldId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteField(@PathVariable("fieldId") String fieldId) {
         try {
-            if (!RegexProcess.fieldIdMatcher(fieldId) || fieldId == null) {
+            if (RegexProcess.fieldIdMatcher(fieldId) || fieldId == null) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             fieldService.deleteField(fieldId);
@@ -117,7 +117,7 @@ public class FieldController {
             updatedFieldDTO.setExtentSizeOfTheField(Double.valueOf(extentSizeOfTheField));
             updatedFieldDTO.setFieldImage1(base64FieldPic1);
             updatedFieldDTO.setFieldImage2(base64FieldPic2);
-            if (!RegexProcess.fieldIdMatcher(fieldId) || fieldId == null) {
+            if (RegexProcess.fieldIdMatcher(fieldId) || fieldId == null) {
                 throw new FieldNotFound(fieldId+" Field not found");
             } else {
                 fieldService.updateField(fieldId,updatedFieldDTO);
