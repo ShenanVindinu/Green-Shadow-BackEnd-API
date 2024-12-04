@@ -93,8 +93,9 @@ public class CropController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrops() {return cropService.getAllCrops();}
 
-    @PreAuthorize("hasRole('MANAGER')")
-    @PutMapping(value = {"{cropId}"},produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
+    @PutMapping(value = {"{cropId}"},
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> updateCrop(@PathVariable("cropId") String cropId,
                                            @RequestPart("cropCommonName") String cropCommonName,
                                            @RequestPart("cropScientificName") String cropScientificName,
