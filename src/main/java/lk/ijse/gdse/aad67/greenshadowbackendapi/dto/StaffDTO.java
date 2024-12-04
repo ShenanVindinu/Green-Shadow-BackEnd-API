@@ -2,6 +2,7 @@ package lk.ijse.gdse.aad67.greenshadowbackendapi.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Gender;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.Role;
 import lk.ijse.gdse.aad67.greenshadowbackendapi.entity.impl.EquipmentEntity;
@@ -39,7 +40,9 @@ public class StaffDTO {
     private String email;
     private Role role;
     private String vehicle;
+    @JsonIgnore
     private List<EquipmentEntity> equipment;
+    @JsonIgnore
     private List<MonitoringLogEntity> monitoringLog;
 
 }
