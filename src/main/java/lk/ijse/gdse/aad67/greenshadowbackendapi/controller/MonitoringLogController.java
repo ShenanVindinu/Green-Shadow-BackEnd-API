@@ -58,7 +58,7 @@ public class MonitoringLogController {
     @DeleteMapping(value = "{logId}")
     public ResponseEntity<Void> deleteLog(@PathVariable("logId") String logId) {
         try {
-            if (!RegexProcess.logIdMatcher(logId) || logId == null) {
+            if (RegexProcess.logIdMatcher(logId) || logId == null) {
                 logger.warn("Log id is not valid");
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
@@ -96,7 +96,7 @@ public class MonitoringLogController {
             monitoringLogDTO.setField(field);
             monitoringLogDTO.setStaff(staff);
 
-            if (!RegexProcess.logIdMatcher(logId) || logId == null) {
+            if (RegexProcess.logIdMatcher(logId) || logId == null) {
                 logger.warn("Log id is not valid");
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
