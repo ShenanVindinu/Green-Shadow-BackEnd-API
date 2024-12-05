@@ -22,10 +22,10 @@ public class FieldEntity implements SuperEntity {
     private String fieldLocation;
     private Double extentSizeOfTheField;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Lob
     private String fieldImage1;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Lob
     private String fieldImage2;
 
     @OneToMany(mappedBy = "field")
