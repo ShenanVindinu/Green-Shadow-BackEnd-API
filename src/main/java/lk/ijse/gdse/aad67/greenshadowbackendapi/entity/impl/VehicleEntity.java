@@ -23,7 +23,7 @@ public class VehicleEntity implements SuperEntity {
     private String fuelType;
 
     @Enumerated(EnumType.STRING)
-    private VehicleStatus status;
+    private VehicleStatus vehicleStatus;
 
     private String remarks;
 

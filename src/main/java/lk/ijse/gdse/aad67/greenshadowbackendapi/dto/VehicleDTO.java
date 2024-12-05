@@ -14,7 +14,7 @@ public class VehicleDTO {
     private String licensePlateNumber;
     private String vehicleCategory;
     private String fuelType;
-    private VehicleStatus status;
+    private VehicleStatus vehicleStatus;
     private String remarks;
 
 }
