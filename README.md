@@ -62,26 +62,28 @@ GreenShadow API is a backend system for managing crops, fields, equipment, vehic
 
 ## API Endpoints  
 
+Here's the updated API structure with `v1` added to every endpoint:  
+
 ### Authentication  
-| Method | Endpoint            | Description           |  
-|--------|---------------------|-----------------------|  
-| POST   | `/api/auth/login`   | Authenticate user and return JWT. |  
-| POST   | `/api/auth/signup`  | Register a new user.  |  
+| Method | Endpoint               | Description                          |  
+|--------|-------------------------|--------------------------------------|  
+| POST   | `/api/v1/auth/signing`  | Authenticate user and return JWT.    |  
+| POST   | `/api/v1/auth/signup`   | Register a new user.                 |  
 
 ### User Management  
-| Method | Endpoint            | Description           |  
-|--------|---------------------|-----------------------|  
-| GET    | `/api/users`        | Retrieve all users.   |  
-| POST   | `/api/users/update` | Update user details.  |  
+| Method | Endpoint                   | Description                          |  
+|--------|----------------------------|--------------------------------------|  
+| GET    | `/api/v1/user/getAllUsers` | Retrieve all users.                  |  
+| POST   | `/api/v1/user/userUpdate`  | Update user details.                 |  
 
 ### Resource Management (Examples)  
-| Resource   | Endpoint                 | Methods |  
-|------------|--------------------------|---------|  
-| Crops      | `/api/crops`             | GET, POST, PUT, DELETE |  
-| Fields     | `/api/fields`            | GET, POST, PUT, DELETE |  
-| Equipment  | `/api/equipment`         | GET, POST, PUT, DELETE |  
-| Vehicles   | `/api/vehicles`          | GET, POST, PUT, DELETE |  
-| Logs       | `/api/logs`              | GET, POST, PUT, DELETE |  
+| Resource   | Endpoint                    | Methods                |  
+|------------|-----------------------------|------------------------|  
+| Crops      | `/api/v1/crop`              | GET, POST, PUT, DELETE |  
+| Fields     | `/api/v1/field`             | GET, POST, PUT, DELETE |  
+| Equipment  | `/api/v1/equipment`         | GET, POST, PUT, DELETE |  
+| Vehicles   | `/api/v1/vehicle`           | GET, POST, PUT, DELETE |  
+| Logs       | `/api/v1/Mlog`              | GET, POST, PUT, DELETE |  
 
 ## File Structure  
 ```plaintext  
@@ -89,22 +91,32 @@ greenShadow-backend/
 ├── src/  
 │   ├── main/  
 │   │   ├── java/  
-│   │   │   └── com/greenshadow/ # Main application package  
+│   │   │   └── com/greenshadow/  # Main application package
+│   │   │       ├── config/       # Configuration classes
+│   │   │       ├── controller/   # REST Controllers
+│   │   │       ├── dao/          # Data Access Objects (Repositories)
+│   │   │       ├── dto/          # Data Transfer Objects
+│   │   │       ├── entity/       # Entities (JPA/Hibernate models)
+│   │   │       ├── exception/    # Exception handling
+│   │   │       ├── secure/       # Security configurations
+│   │   │       ├── service/      # Service layer
+│   │   │       └── util/         # Utility classes
 │   │   ├── resources/  
-│   │   │   ├── application.properties # Configuration  
-│   │   │   └── data.sql # Sample data  
+│   │   │   └── application.properties # Configuration  
 ├── pom.xml         # Maven build file  
 ├── README.md       # Project documentation  
-└── LICENSE         # License file  
+└── LICENSE         # License file
+ 
 ```  
 
 ## Security  
 This project uses Spring Security for authentication and authorization. JWT tokens are issued upon successful login and are required for accessing protected resources.  
 
 ### Roles and Permissions  
-- **ADMIN**: Full access to all endpoints.  
-- **MANAGER**: Restricted access to certain CRUD operations.  
-- **SCIENTIST/OTHER**: Limited read/write permissions.  
+- **MANAGER**: Full access to all endpoints.  
+- **ADMIN**: Restricted access to certain CRUD operations.  
+- **SCIENTIST/OTHER**: Limited read/write permissions.
+- When Signup, User Role will be set to **OTHER** by default (only admin Manager can assign you a role)  
 
 ## Contributing  
 Contributions are welcome! Fork the repository, make your changes, and submit a pull request.  
