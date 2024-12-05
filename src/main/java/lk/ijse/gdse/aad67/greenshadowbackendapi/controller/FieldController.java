@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,13 +37,15 @@ public class FieldController {
             @RequestPart("fieldName") String fieldName,
             @RequestPart("fieldLocation") String fieldLocation,
             @RequestPart("extentSizeOfTheField") String extentSizeOfTheField,
-            @RequestPart("fieldImage1") String fieldImage1,
-            @RequestPart("fieldImage2") String fieldImage2
+            @RequestPart("fieldImage1") MultipartFile fieldImage1,
+            @RequestPart("fieldImage2") MultipartFile fieldImage2
     ) {
         String base64FieldPic1 = "";
         String base64FieldPic2 = "";
 
         try {
+
+
             byte[] bytesFieldPic1 = fieldImage1.getBytes();
             byte[] bytesFieldPic2 = fieldImage2.getBytes();
             base64FieldPic1 = AppUtil.PicToBase64(bytesFieldPic1);
@@ -99,8 +102,8 @@ public class FieldController {
                                             @RequestPart("fieldName") String fieldName,
                                             @RequestPart("fieldLocation") String fieldLocation,
                                             @RequestPart("extentSizeOfTheField") String extentSizeOfTheField,
-                                            @RequestPart("fieldImage1") String fieldImage1,
-                                            @RequestPart("fieldImage2") String fieldImage2
+                                            @RequestPart("fieldImage1") MultipartFile fieldImage1,
+                                            @RequestPart("fieldImage2") MultipartFile fieldImage2
     ) {
         String base64FieldPic1 = "";
         String base64FieldPic2 = "";
